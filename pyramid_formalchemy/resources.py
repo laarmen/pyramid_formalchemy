@@ -164,7 +164,7 @@ class Model(Base):
         query = request.session_factory.query(request.model_class)
         try:
             request.model_instance = request.query_factory(request, query, id=name)
-        except sqlalchemy_exceptions.SQLAlchemyError, exc:
+        except sqlalchemy_exceptions.SQLAlchemyError as exc:
             log.exception(exc)
             request.session_factory().rollback()
             raise NotFound(request.path)
